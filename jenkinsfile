@@ -1,0 +1,61 @@
+pipeline {
+    agent any
+    environment {
+    DIRECTORY_PATH = "/Users/jalalferoj/Desktop/Deakin University/SIT223 Professional Practice in Information Technology/WEEKLY TASKS"
+    TESTING_ENVIRONMENT = "testing-environment"
+    PRODUCTION_ENVIRONMENT = "Md Jalal Feroj"
+    }
+    stages {
+        stage("Build") {
+            steps {
+                echo "This is a Build Stage"
+                sh "python --version"
+                echo "Fetch the Code from $DIRECTORY_PATH and Build"
+                echo "Build Stage Completed"
+            }
+        }
+       
+        stage("Unit and Interation Test") {
+            steps {
+                echo "This is a Test Stage"
+                echo "This is a $TESTING_ENVIRONMENT environment."
+                echo "Running integration tests"
+            }
+        }
+    
+        stage("Code Analysis") {
+            steps {
+                echo "This is a Code Analysis Stage"
+                echo "integrate a code analysis tool to analyse the code"
+            }
+        }
+    
+        stage("Security Scan") {
+            steps {
+                echo "This is a Security Scan Stage"
+                echo "Perfor a security scan on the code"
+            }
+        }
+                
+        stage("Deploy to Staging") {
+            steps {
+                echo "This is a Deploy to Staging"
+                echo "Perfor a deploy the application to a staging server"      
+            }
+        }                
+        stage("Integration Tests on Staging") {
+            steps {
+                echo "This is a Integration Tests on Staging"
+                echo "Run integration tests on the staging environment"
+            }
+        }
+        
+        stage("Deploy to Production") {
+            steps {
+                echo "This is a Deploy to Production Stage"
+                echo "Deploying the code to the production environment: $PRODUCTION_ENVIRONMENT"
+            }
+        }
+    }
+}
+
