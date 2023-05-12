@@ -55,6 +55,12 @@ pipeline {
                 echo "This is a Deploy to Production Stage"
                 echo "Deploying the code to the production environment: $PRODUCTION_ENVIRONMENT"
             }
+
+            post {
+                mail to:"mferoj@deakin.edu.au",
+                subject: "Deployment to the Production",
+                bod: " Sucessfully Deployed"
+            }
         }
     }
 }
