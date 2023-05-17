@@ -57,9 +57,11 @@ pipeline {
             }
 
             post {
-                mail to:"mferoj@deakin.edu.au",
-                subject: "Deployment to the Production",
-                bod: " Sucessfully Deployed"
+                always{
+                    mail to:"mferoj@deakin.edu.au",
+                    subject: "Deployment to the Production",
+                    bod: " Sucessfully Deployed"
+                }
             }
         }
     }
