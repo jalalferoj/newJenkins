@@ -72,7 +72,7 @@ pipeline {
                 }
 
             triggers {
-                pollSCM('*/5 * * * *') // Polls the SCM (GitHub repository) every 5 minutes
+                pollSCM('* * * * *') 
             }
         }
     }
