@@ -65,5 +65,11 @@ pipeline {
             subject: "Deployment to Production",
             body: "Successful Deployed"
         }
+
+        failure {
+            mail to: "mferoj@deakin.edu.au",
+            subject: "Deployment to Production",
+            body: "Deployed Failed"
+        }
     }
 }
