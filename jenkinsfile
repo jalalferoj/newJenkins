@@ -1,10 +1,11 @@
 pipeline {
     agent any
     environment {
-    DIRECTORY_PATH = "/Users/jalalferoj/Desktop/Deakin University/SIT223 Professional Practice in Information Technology/WEEKLY TASKS"
-    TESTING_ENVIRONMENT = "testing-environment"
-    PRODUCTION_ENVIRONMENT = "Md Jalal Feroj"
+        DIRECTORY_PATH = "/Users/jalalferoj/Desktop/Deakin University/SIT223 Professional Practice in Information Technology/WEEKLY TASKS"
+        TESTING_ENVIRONMENT = "testing-environment"
+        PRODUCTION_ENVIRONMENT = "Md Jalal Feroj"
     }
+   
     stages {
         stage("Build") {
             steps {
@@ -15,7 +16,7 @@ pipeline {
             }
         }
        
-        stage("Unit and Interation Test") {
+        stage("Unit and Integration Test") {
             steps {
                 echo "This is a Test Stage"
                 echo "This is a $TESTING_ENVIRONMENT environment."
@@ -26,26 +27,26 @@ pipeline {
         stage("Code Analysis") {
             steps {
                 echo "This is a Code Analysis Stage"
-                echo "integrate a code analysis tool to analyse the code"
+                echo "Integrate a code analysis tool to analyze the code"
             }
         }
     
         stage("Security Scan") {
             steps {
                 echo "This is a Security Scan Stage"
-                echo "Perfor a security scan on the code"
+                echo "Perform a security scan on the code"
             }
         }
                 
         stage("Deploy to Staging") {
             steps {
-                echo "This is a Deploy to Staging"
-                echo "Perfor a deploy the application to a staging server"      
+                echo "This is a Deploy to Staging Stage"
+                echo "Deploy the application to a staging server"      
             }
         }                
         stage("Integration Tests on Staging") {
             steps {
-                echo "This is a Integration Tests on Staging"
+                echo "This is an Integration Tests on Staging Stage"
                 echo "Run integration tests on the staging environment"
             }
         }
@@ -55,26 +56,26 @@ pipeline {
                 echo "This is a Deploy to Production Stage"
                 echo "Deploying the code to the production environment: $PRODUCTION_ENVIRONMENT"
             }
-
-            post {
-                success {
-                    emailext subject: 'Pipeline Successful',
-                    body: 'The pipeline has been executed successfully.',
-                    attachLog: true,
-                    to: 'mferoj@deakin.edu.com'
-                }
-
-                failure {
-                    emailext subject: 'Pipeline Failed',
-                    body: 'The pipeline has failed. Please check the console output for more details.',
-                    attachLog: true,
-                    to: 'mferoj@deakin.edu.com'
-                }
-
-            triggers {
-                pollSCM('* * * * *') 
-            }
         }
     }
-}
 
+    post {
+        success {
+            emailext subject: 'Pipeline Successful',
+                body: 'The pipeline has been executed successfully.',
+                attachLog: true,
+                to: 'mferoj@deakin.edu.com'
+        }
+
+        failure {
+            emailext subject: 'Pipeline Failed',
+                body: 'The pipeline has failed. Please check the console output for more details.',
+                attachLog: true,
+                to: 'mferoj@deakin.edu.com'
+        }
+    }
+
+    triggers {
+        pollSCM('* * * * *') 
+    }
+}
