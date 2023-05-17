@@ -61,21 +61,13 @@ pipeline {
 
     post {
         success {
-            emailext subject: 'Pipeline Successful',
-                body: 'The pipeline has been executed successfully.',
-                attachLog: true,
-                to: 'mferoj@deakin.edu.com'
+            mail to: "mferoj@deakin.edu.au",
+            subject: "Deployment to Production",
+            body: "Sucessfull Deployed"
         }
 
         failure {
-            emailext subject: 'Pipeline Failed',
-                body: 'The pipeline has failed. Please check the console output for more details.',
-                attachLog: true,
-                to: 'mferoj@deakin.edu.com'
+            
         }
-    }
-
-    triggers {
-        pollSCM('* * * * *') 
     }
 }
