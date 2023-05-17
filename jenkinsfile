@@ -70,7 +70,6 @@ pipeline {
                     attachLog: true,
                     to: 'mferoj@deakin.edu.com'
                 }
-    
 
             triggers {
                 pollSCM('*/5 * * * *') // Polls the SCM (GitHub repository) every 5 minutes
