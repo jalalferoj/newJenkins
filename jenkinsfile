@@ -57,11 +57,23 @@ pipeline {
             }
 
             post {
-                always{
-                    mail to:"mferoj@deakin.edu.au",
-                    subject: "Deployment to the Production",
-                    bod: " Sucessfully Deployed"
+                success {
+                    emailext subject: 'Pipeline Successful',
+                    body: 'The pipeline has been executed successfully.',
+                    attachLog: true,
+                    to: 'mferoj@deakin.edu.com'
                 }
+
+                failure {
+                    emailext subject: 'Pipeline Failed',
+                    body: 'The pipeline has failed. Please check the console output for more details.',
+                    attachLog: true,
+                    to: 'mferoj@deakin.edu.com'
+                }
+    
+
+            triggers {
+                pollSCM('*/5 * * * *') // Polls the SCM (GitHub repository) every 5 minutes
             }
         }
     }
